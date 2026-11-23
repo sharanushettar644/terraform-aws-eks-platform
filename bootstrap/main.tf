@@ -31,6 +31,19 @@ locals {
   bucket_name = "${var.project}-tfstate-${data.aws_caller_identity.current.account_id}"
 }
 
+# Customer-managed key for the state bucket: you control rotation, key policy
+# and audit trail (state files can contain sensitive values).
+resource "aws_kms_key" "state" {
+  description             = "Encrypts Terraform state for ${var.project}"
+  deletion_window_in_days = 30
+  enable_key_rotation     = true
+}
+
+resource "aws_kms_alias" "state" {
+  name          = "alias/${var.project}-tfstate"
+  target_key_id = aws_kms_key.state.key_id
+}
+
 resource "aws_s3_bucket" "state" {
   bucket = local.bucket_name
 
@@ -52,7 +65,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "state" {
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm = "aws:kms"
+      sse_algorithm     = "aws:kms"
+      kms_master_key_id = aws_kms_key.state.arn
     }
     bucket_key_enabled = true
   }

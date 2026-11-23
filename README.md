@@ -174,7 +174,7 @@ Prod costs more: 3 NAT gateways, 3+ on-demand nodes and flow logs. Destroy dev w
 **Sharanabasava Shettar**: DevOps Engineer | CKA, CKAD
 
 I build and automate Kubernetes platforms on AWS, Azure and GCP.
-[LinkedIn](https://www.linkedin.com/in/sharanabasava-shettar)
+[LinkedIn](https://www.linkedin.com/in/sharan-shettar-0b699821a)
 
 ## License
 

@@ -1,0 +1,11 @@
+# Accepted risks, each with a reason. Review these regularly.
+
+# AVD-AWS-0040 / AVD-AWS-0041: public EKS API endpoint. It is restricted to
+# endpoint_public_access_cidrs; set endpoint_public_access = false when CI and
+# admins reach the cluster through a VPN or from inside the VPC.
+AVD-AWS-0040
+AVD-AWS-0041
+
+# AVD-AWS-0057: wildcard resources in IAM policies. Required by the official
+# AWS Load Balancer Controller and Cluster Autoscaler read-only permissions.
+AVD-AWS-0057
